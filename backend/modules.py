@@ -1,9 +1,13 @@
 import psutil
 import cpuinfo
 import time
+import requests
+import pytz
+from datetime import datetime, timezone
+import humanize
 # init
 cpu_block = cpuinfo.get_cpu_info()
-
+cpu = []
 
 class api:
 
@@ -40,7 +44,7 @@ class api:
         return psutil.disk_usage("/").percent
 
     def mem_total():
-        return f"{round(psutil.virtual_memory().total / pow(100,3),1)} GB"
+        return f"{round(psutil.virtual_memory().total / pow(1000,3),1)} GB"
     
     def mem_used():
         return f"{round(psutil.virtual_memory().used / pow(1024,3),1)} GB"
@@ -51,16 +55,58 @@ class api:
     def mem_total_raw():
         return round(psutil.virtual_memory().total / pow(1024,3),1)
     
-    def mem_asd():
-        return psutil.net_io_counters()
+    def net_sent_data_gb():
+        return round(psutil.net_io_counters().bytes_sent / pow(1024,2))
+    
+    def net_reci_data_gb():
+        return round(psutil.net_io_counters().bytes_recv / pow(1024,2))
+
+    def username():
+        return psutil.users()[0].name
+    
+    def cpu_graph():
+        global cpu
+        global api_requests
+
+        while True:
+            curr_cpu = psutil.cpu_percent(interval=1)
+            cpu.append(curr_cpu)
+
+            if len(cpu) > 20:
+                cpu.pop(0)
+        
+
+            time.sleep(1)
+    
+    def public_ip():
+        return requests.get('https://checkip.amazonaws.com').text.strip()
+
+    def startup():
+        unix_timestamp = psutil.boot_time()
+        desired_timezone = 'Europe/Budapest'
+
+        # Convert UNIX timestamp to UTC datetime using datetime.fromtimestamp()
+        datetime_utc = datetime.fromtimestamp(unix_timestamp, timezone.utc)
+
+        # Convert to desired timezone
+        desired_timezone = pytz.timezone(desired_timezone)
+        datetime_desired_timezone = datetime_utc.astimezone(desired_timezone)
+
+        # Get current time in the desired timezone
+        current_time = datetime.now(desired_timezone)
+
+        # Calculate time difference
+        time_difference = current_time - datetime_desired_timezone
+
+        # Get human-readable relative time
+        relative_time = humanize.naturaltime(time_difference)
+
+        return relative_time
 
 
 
 
-
-
-
-print(api.mem_asd())
+print(api.startup())
 
 
 
