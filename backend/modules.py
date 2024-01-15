@@ -5,6 +5,9 @@ import requests
 import pytz
 from datetime import datetime, timezone
 import humanize
+import threading
+
+
 # init
 cpu_block = cpuinfo.get_cpu_info()
 cpu = []
@@ -84,27 +87,20 @@ class api:
     def startup():
         unix_timestamp = psutil.boot_time()
         desired_timezone = 'Europe/Budapest'
-
-        # Convert UNIX timestamp to UTC datetime using datetime.fromtimestamp()
         datetime_utc = datetime.fromtimestamp(unix_timestamp, timezone.utc)
-
-        # Convert to desired timezone
         desired_timezone = pytz.timezone(desired_timezone)
         datetime_desired_timezone = datetime_utc.astimezone(desired_timezone)
-
-        # Get current time in the desired timezone
         current_time = datetime.now(desired_timezone)
-
-        # Calculate time difference
         time_difference = current_time - datetime_desired_timezone
-
-        # Get human-readable relative time
         relative_time = humanize.naturaltime(time_difference)
 
         return relative_time
 
 
-
+while True:
+    api.cpu_graph()
+    print(cpu)
+    time.sleep(1)
 
 print(api.startup())
 
