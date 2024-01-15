@@ -26,7 +26,10 @@ class api:
         return cpu_block["arch"]
     
     def cpu_name():
-        return cpu_block["brand_raw"]
+        if psutil.LINUX:
+            return cpu_block["brand"]
+        else:
+            return cpu_block["brand_raw"]
     
     def cpu_clock():
         cpu_clock = cpu_block["hz_actual"][0]
@@ -88,13 +91,13 @@ class api:
         global mem
 
         while True:
-            curr_mem = psutil.virtual_memory().percent
+            curr_mem = float(psutil.virtual_memory().percent)
             mem.append(curr_mem)
 
             if len(mem) > 20:
                 mem.pop(0)
 
-            time.sleep(1)
+            time.sleep(2)
     
     def public_ip():
         return requests.get('https://checkip.amazonaws.com').text.strip()

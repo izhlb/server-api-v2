@@ -6,8 +6,6 @@ import threading
 app = Flask(__name__)
 CORS(app)
 
-
-
 @app.route('/api/users')
 def get_users():
     
@@ -45,7 +43,7 @@ def get_users():
         },
         "graphs":{
             "cpu":f"{cpu}",
-            "mem":[]
+            "mem":f"{mem}"
         }
 
         }
@@ -56,7 +54,7 @@ if __name__ == '__main__':
     cpu_thread = threading.Thread(target=api.cpu_graph)
     cpu_thread.daemon = True
     cpu_thread.start()
-    cpu_thread = threading.Thread(target=api.mem_graph)
-    cpu_thread.daemon = True
-    cpu_thread.start()
-    app.run(port=5000, debug=True)
+    mem_thread = threading.Thread(target=api.mem_graph)
+    mem_thread.daemon = True
+    mem_thread.start()
+    app.run(host="0.0.0.0",port=5000, debug=True)
