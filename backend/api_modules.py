@@ -5,20 +5,22 @@ import requests
 import pytz
 from datetime import datetime, timezone
 import humanize
-import threading
+import socket
+
+
+
 
 
 # init
 cpu_block = cpuinfo.get_cpu_info()
 cpu = []
+mem = []
 
 class api:
 
     def cpu_threads():
         return psutil.cpu_count()
     
-    def cpu_freq():
-        return psutil.cpu_freq()
     
     def cpu_architecture():
         return cpu_block["arch"]
@@ -35,16 +37,19 @@ class api:
             return f"{cpu_clock / 1000000000} GHz" # GHz
     
     def disk_primary_total():
-        return psutil.disk_usage("/").total
+        return round(psutil.disk_usage("/").total / pow(1024,3),2)
     
     def disk_primary_used():
-        return psutil.disk_usage("/").used
+        return round(psutil.disk_usage("/").used / pow(1024,3),2)
 
     def disk_primary_free():
-        return psutil.disk_usage("/").free
+        return round(psutil.disk_usage("/").free / pow(1024,3),2)
     
     def disk_primary_percent():
-        return psutil.disk_usage("/").percent
+        return psutil.disk_usage("/").percent 
+    
+    def disk_partition():
+        return psutil.disk_partitions()[0]
 
     def mem_total():
         return f"{round(psutil.virtual_memory().total / pow(1000,3),1)} GB"
@@ -69,7 +74,6 @@ class api:
     
     def cpu_graph():
         global cpu
-        global api_requests
 
         while True:
             curr_cpu = psutil.cpu_percent(interval=1)
@@ -77,7 +81,18 @@ class api:
 
             if len(cpu) > 20:
                 cpu.pop(0)
-        
+
+            time.sleep(1)
+
+    def mem_graph():
+        global mem
+
+        while True:
+            curr_mem = psutil.virtual_memory().percent
+            mem.append(curr_mem)
+
+            if len(mem) > 20:
+                mem.pop(0)
 
             time.sleep(1)
     
@@ -95,14 +110,19 @@ class api:
         relative_time = humanize.naturaltime(time_difference)
 
         return relative_time
+    
+    def local_ip():
+        return socket.gethostbyname(socket.gethostname())
+    
+    def hostname():
+        return socket.gethostname()
 
 
-while True:
-    api.cpu_graph()
-    print(cpu)
-    time.sleep(1)
 
-print(api.startup())
+
+
+
+
 
 
 

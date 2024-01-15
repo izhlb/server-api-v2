@@ -1,3 +1,2 @@
-import platform
-
-print(platform.version())
+import psutil
+print(psutil.disk_partitions()[0].mountpoint)

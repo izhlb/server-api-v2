@@ -1,0 +1,36 @@
+{
+    "cpu":{
+        "threads":"",
+        "frequency":"",
+        "architecture":"",
+        "brand":"",
+        "clock":""
+    },
+    "disk":{
+        "total":"",
+        "used":"",
+        "free":"",
+        "percent":""
+    },
+    "memory":{
+        "total":"",
+        "used":"",
+        "percent":""
+    },
+    "net":{
+        "data_sent":"",
+        "data_recieved":"",
+        "public_ip":"",
+        "local_ip":""
+    },
+    "other":{
+        "username":"",
+        "hostname":"",
+        "startup":""
+    },
+    "graphs":{
+        "cpu":[],
+        "mem":[]
+    }
+
+}
