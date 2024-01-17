@@ -12,25 +12,37 @@
     <div class="wrapper">
         <div class="grid-7030">
             <div class="title"><span>Server Statistics</span></div>
-            <div class="title"><span>Random</span></div>
+            <div class="title"><span>Network</span></div>
         </div>
         <div class="grid-7030 top-margin">
             <div class="server-info-wrapper">
                 <div class="card-wrap-1">
-                    <div class="card-green">
+                    <div class="card">
                         <div class="card-title"><span>Server State</span></div>
                         <div class="card-value"><span id="state" class="fancy-text-good"></span></div>
                         <div class="card-graph"></div>
                     </div>
-                    <div class="card-green"></div>
-                    <div class="card-green"></div>
-                    <div class="card-green"></div>
+                    <div class="card">
+                        <div class="card-title"><span>Running since</span></div>
+                        <div class="card-value"><span  class="fancy-text-info">23 hrs</span></div>
+                        <div class="card-graph"></div>
+                    </div>
+                    <div class="card-long">
+                        <div class="card-title"><span>Hostname</span></div>
+                        <div class="card-value"><span id="state" class="fancy-text-casual">whitewater</span></div>
+                        <div class="card-graph"></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title"><span>Ping</span></div>
+                        <div class="card-value"><span id="errors" class="fancy-text-info">34ms</span></div>
+                        <div class="card-graph"></div>
+                    </div>
+
+                    
                 </div>
             </div>
             <div class="other-wrapper"></div>
         </div>
-        <button onclick="changestateup()"></button>
-        <button onclick="changestatedown()"></button>
     </div>
     <script src="./index.js"></script>
 </body>
