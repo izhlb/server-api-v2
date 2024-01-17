@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Information</title>
+</head>
+<body>
+
+  <h1>System Information</h1>
+
+  <div id="systemInfo">
+    <h2 id="cpuHeading">CPU Information</h2>
+    <p id="architecture">Architecture: </p>
+    <p id="brand">Brand: </p>
+    <p id="clock">Clock: </p>
+    <p id="threads">Threads: </p>
+
+    <h2 id="diskHeading">Disk Information</h2>
+    <p id="filesystem">Filesystem: </p>
+    <p id="freeSpace">Free Space: </p>
+    <p id="totalSpace">Total Space: </p>
+    <p id="usedSpace">Used Space: </p>
+
+    <h2 id="graphsHeading">Graphs Information</h2>
+    <p id="cpuGraph">CPU Graph: </p>
+    <p id="memoryGraph">Memory Graph: </p>
+
+    <h2 id="memoryHeading">Memory Information</h2>
+    <p id="memoryUsage">Usage: </p>
+    <p id="memoryTotal">Total: </p>
+    <p id="memoryUsed">Used: </p>
+
+    <h2 id="networkHeading">Network Information</h2>
+    <p id="dataReceived">Data Received: </p>
+    <p id="dataSent">Data Sent: </p>
+    <p id="localIP">Local IP: </p>
+    <p id="publicIP">Public IP: </p>
+
+    <h2 id="otherHeading">Other Information</h2>
+    <p id="hostname">Hostname: </p>
+    <p id="startup">Startup: </p>
+    <p id="username">Username: </p>
+  </div>
+
+  <script>
+    // Create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+
+    // Configure it to make a GET request to the API
+    xhr.open("GET", "http://192.168.0.109:5000/api/users", true);
+
+    // Set the callback function to handle the API response
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        // Parse the JSON response
+        var data = JSON.parse(xhr.responseText);
+
+        // Update HTML content with the fetched data
+        document.getElementById('architecture').textContent = `Architecture: ${data.cpu.architecture}`;
+        document.getElementById('brand').textContent = `Brand: ${data.cpu.brand}`;
+        document.getElementById('clock').textContent = `Clock: ${data.cpu.clock}`;
+        document.getElementById('threads').textContent = `Threads: ${data.cpu.threads}`;
+
+        document.getElementById('filesystem').textContent = `Filesystem: ${data.disk.filesystem}`;
+        document.getElementById('freeSpace').textContent = `Free Space: ${data.disk.free} GB`;
+        document.getElementById('totalSpace').textContent = `Total Space: ${data.disk.total} GB`;
+        document.getElementById('usedSpace').textContent = `Used Space: ${data.disk.used} GB`;
+
+
+
+        document.getElementById('memoryUsage').textContent = `Usage: ${data.memory.percent}%`;
+        document.getElementById('memoryTotal').textContent = `Total: ${data.memory.total}`;
+        document.getElementById('memoryUsed').textContent = `Used: ${data.memory.used}`;
+
+        document.getElementById('dataReceived').textContent = `Data Received: ${data.net.data_recieved}`;
+        document.getElementById('dataSent').textContent = `Data Sent: ${data.net.data_sent}`;
+        document.getElementById('localIP').textContent = `Local IP: ${data.net.local_ip}`;
+        document.getElementById('publicIP').textContent = `Public IP: ${data.net.public_ip}`;
+
+        document.getElementById('hostname').textContent = `Hostname: ${data.other.hostname}`;
+        document.getElementById('startup').textContent = `Startup: ${data.other.startup}`;
+        document.getElementById('username').textContent = `Username: ${data.other.username}`;
+      }
+    };
+
+    // Send the request
+    xhr.send();
+  </script>
+
+</body>
+</html>
