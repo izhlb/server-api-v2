@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Whitewater</title>
 </head>
+
 <body>
     <div class="wrapper">
         <div class="grid-7030">
             <div class="title"><span>Server Statistics</span></div>
             <div class="title"><span>Random</span></div>
         </div>
+        <div class="grid-7030 top-margin">
+            <div class="server-info-wrapper">
+                <div class="card-wrap-1">
+                    <div class="card-green">
+                        <div class="card-title"><span>Server State</span></div>
+                        <div class="card-value"><span id="state" class="fancy-text-good"></span></div>
+                        <div class="card-graph"></div>
+                    </div>
+                    <div class="card-green"></div>
+                    <div class="card-green"></div>
+                    <div class="card-green"></div>
+                </div>
+            </div>
+            <div class="other-wrapper"></div>
+        </div>
+        <button onclick="changestateup()"></button>
+        <button onclick="changestatedown()"></button>
     </div>
+    <script src="./index.js"></script>
 </body>
+
 </html>
