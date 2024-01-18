@@ -34,7 +34,8 @@ def get_users():
             "data_sent":f"{api.net_sent_data_gb()}",
             "data_recieved":f"{api.net_reci_data_gb()}",
             "public_ip":f"{api.public_ip()}",
-            "local_ip":f"{api.local_ip()}"
+            "local_ip":f"{api.local_ip()}",
+            "ping":f"{api.ping()}"
         },
         "other":{
             "username":f"{api.username()}",
@@ -44,6 +45,9 @@ def get_users():
         "graphs":{
             "cpu":f"{cpu}",
             "mem":f"{mem}"
+        },
+        "processes":{
+            "NOT_IMPLEMENTED":"0"
         }
 
         }

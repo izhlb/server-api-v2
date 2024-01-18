@@ -6,6 +6,7 @@ import pytz
 from datetime import datetime, timezone
 import humanize
 import socket
+import ping3
 
 
 
@@ -119,6 +120,9 @@ class api:
     
     def hostname():
         return socket.gethostname()
+    
+    def ping():
+        return round(ping3.ping('1.1.1.1')*1000)
 
 
 
