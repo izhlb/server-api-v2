@@ -6,13 +6,16 @@ import threading
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/api/users')
+
+
+@app.route('/api/v2/system')
 def get_users():
     
     users = {
         "cpu":{
             "threads":f"{api.cpu_threads()}",
             "architecture":f"{api.cpu_architecture()}",
+            "arch":f"{api.cpu_arch2()}",
             "brand":f"{api.cpu_name()}",
             "clock":f"{api.cpu_clock()}"
         },
@@ -53,6 +56,9 @@ def get_users():
         }
 
     return jsonify(users)
+
+
+
 
 if __name__ == '__main__':
     cpu_thread = threading.Thread(target=api.cpu_graph)

@@ -28,10 +28,12 @@ class api:
     
     def cpu_name():
         if psutil.LINUX:
-            return cpu_block["brand"]
+            return cpu_block["brand"].replace(" Processor", "").replace(" 6-Core", "").replace("AMD ","").rstrip()
         else:
-            return cpu_block["brand_raw"]
-    
+            return cpu_block["brand_raw"].replace("Processor", "").replace("6-Core", "").replace("AMD ","").replace("asn","asdasdsadadasdasdasdasd").rstrip()
+
+    def cpu_arch2():
+        return cpu_block["arch_string_raw"]
     def cpu_clock():
         cpu_clock = cpu_block["hz_actual"][0]
 
@@ -103,6 +105,18 @@ class api:
     def public_ip():
         return requests.get('https://checkip.amazonaws.com').text.strip()
 
+    def format_time_difference(time_difference):
+        days, seconds = time_difference.days, time_difference.seconds
+        hours = days * 24 + seconds // 3600
+        minutes = (seconds % 3600) // 60
+
+        if hours > 0:
+            return f"{hours} hrs"
+        elif minutes > 0:
+            return f"{minutes} mins"
+        else:
+            return "just now"
+
     def startup():
         unix_timestamp = psutil.boot_time()
         desired_timezone = 'Europe/Budapest'
@@ -111,9 +125,11 @@ class api:
         datetime_desired_timezone = datetime_utc.astimezone(desired_timezone)
         current_time = datetime.now(desired_timezone)
         time_difference = current_time - datetime_desired_timezone
-        relative_time = humanize.naturaltime(time_difference)
+
+        relative_time = api.format_time_difference(time_difference)
 
         return relative_time
+
     
     def local_ip():
         return socket.gethostbyname(socket.gethostname())

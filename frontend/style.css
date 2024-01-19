@@ -4,7 +4,26 @@ body
 {
     background-color: #111217;
     font-family: 'Inter';
+
 }
+
+
+
+::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 25px;
+    background-color: transparent;
+  }
+  
+  
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    
+    transition: 0.5s;
+  }
+
 
 .wrapper
 {
@@ -23,6 +42,21 @@ body
     background-color: #181B1F;
     border-radius: 3px;
     margin-top: 30px;
+    height: auto;
+    padding: 5px 0px 5px 0px;
+    text-align: center;
+    color: aliceblue;
+    font-weight: 100;
+}
+
+.title-in
+{
+    width: 100%;
+    margin: auto;
+    border:1px solid #2E3136;
+    background-color: #181B1F;
+    border-radius: 3px;
+    margin-top: 10px;
     height: auto;
     padding: 5px 0px 5px 0px;
     text-align: center;
@@ -75,6 +109,7 @@ body
 .server-info-wrapper
 {
     width: 100%;
+
 }
 
 .network-wrapper
@@ -90,6 +125,17 @@ body
     gap: 10px;
     margin-top: 10px;
 }
+
+.card-wrap-5
+{
+    width: 300px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+
 
 .top-margin
 {
@@ -125,11 +171,19 @@ body
     color: hsl(1, 66%, 27%);
     text-shadow: 0px 0px 30px hsl(1, 67%, 14%)
 }
+
+.fancy-text-warning
+{
+    font-size: 40px;
+    font-weight: 900;
+    color: hsl(21, 60%, 45%);
+    text-shadow: 0px 0px 30px hsl(21, 67%, 24%)
+}
 .fancy-text-info
 {
     font-size: 40px;
     font-weight: 900;
-    color: hsl(216, 39%, 38%);
+    color: #3b5987;
     text-shadow: 0px 0px 30px hsl(216, 39%, 28%);
 }
 .fancy-text-casual
@@ -138,4 +192,64 @@ body
     font-weight: 900;
     color: hsl(0, 0%, 100%);
     text-shadow: 0px 0px 30px hsl(0, 0%, 30%);
+}
+.fancy-text-pink
+{
+    font-size: 40px;
+    font-weight: 900;
+    color:rgba(161, 46, 50, 1);
+    text-shadow: 0px 0px 30px hsl(358, 56%, 21%)
+}
+.card-wrap-graph-long
+{
+    width: 830px;
+
+    margin: auto;
+    border:1px solid #2E3136;
+    background-color: #181B1F;
+    border-radius: 3px;
+    margin-top: 10px;
+    height: 200px;
+    padding: 5px 5px 5px 5px;
+    text-align: center;
+    color: aliceblue;
+    font-weight: 100;
+}
+
+.hidden-div
+{
+    /* display: none; */
+}
+
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.spin
+{
+    width: 100px;
+    height: 100px;
+    animation: spin 1s infinite linear;
+
+    border-radius: 100%;
+}
+.loading
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.spin-load-text
+{
+    color: white;
+    font-size: 49px;
+    margin-left: 20px;
 }

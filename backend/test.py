@@ -1,4 +1,3 @@
-import ping3
+import cpuinfo
 
-
-print(round(ping3.ping('1.1.1.1')*1000))
+print(cpuinfo.get_cpu_info())
