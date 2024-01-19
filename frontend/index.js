@@ -2,6 +2,9 @@ let options_endpoint = 'http://localhost:5000/api/v2/system';
 
 let cpu_list = null;
 let mem_list = null;
+
+let disk_free = null;
+let disk_used = null;
 let myChart;
 
 
@@ -30,6 +33,10 @@ function fetchData() {
             return response.json();
         })
         .then(data => {
+          cpu_list = JSON.parse(data.graphs.cpu);
+          mem_list = JSON.parse(data.graphs.mem);
+          disk_free = JSON.parse(data.disk.free);
+          disk_used = JSON.parse(data.disk.used);
             document.getElementById('ping').textContent = data.net.ping + 'ms';
             document.getElementById('startup').textContent = data.other.startup;
             document.getElementById('hostname').textContent = data.other.hostname;
@@ -39,9 +46,17 @@ function fetchData() {
             document.getElementById('cpu_name').textContent = data.cpu.brand;
 
             document.getElementById('mem_usage').textContent = data.memory.used;
+            document.getElementById('mem_free').textContent = data.memory.percent + "%";
+            document.getElementById('mem_total').textContent = data.memory.total;
 
-            cpu_list = JSON.parse(data.graphs.cpu);
-            mem_list = JSON.parse(data.graphs.mem);
+            document.getElementById('disk_used').textContent = Math.round(disk_used) + " GB" ;
+            document.getElementById('filesystem').textContent = data.disk.filesystem;
+            document.getElementById('mountpoint').textContent = data.disk.mount;
+            document.getElementById('disk_total').textContent = Math.round(data.disk.total) + " GB";
+
+            
+
+
 
 
             if (myChart) {
@@ -74,6 +89,19 @@ function cpu_chart() {
         }]
     };
 
+    var datadrive = {
+      labels: ["Free",'Used'],
+      datasets: [{
+          label: "DISK",
+          backgroundColor: ['rgb(59, 59, 59)','rgb(11, 111, 80)'],
+          fill: true,
+
+          pointBackgroundColor: 'rgba(75, 192, 192,0.0000001)',
+          borderWidth: 0,
+          data: [disk_free,disk_used]
+      }]
+  };
+
     var data2 = {
       labels: [],
       datasets: [{
@@ -86,6 +114,7 @@ function cpu_chart() {
           data: mem_list
       }]
   };
+
 
     var options = {
         animation: false,
@@ -116,10 +145,12 @@ function cpu_chart() {
         }
     };
 
-    
+
+
 
     var ctx = document.getElementById('myChart').getContext('2d');
     var ctx2 = document.getElementById('memChart').getContext('2d');
+    var ctx3 = document.getElementById('diskChart').getContext('2d');
 
 
     myChart = new Chart(ctx, {
@@ -132,6 +163,14 @@ function cpu_chart() {
       data: data2,
       options: options
   });
+
+  diskChart = new Chart(ctx3, {
+    type: 'doughnut',
+    data: datadrive,
+    borderWidth: 5 
+
+
+});
 
 }
 
