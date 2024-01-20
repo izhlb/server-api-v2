@@ -35,7 +35,10 @@ class api:
     def cpu_arch2():
         return cpu_block["arch_string_raw"]
     def cpu_clock():
-        cpu_clock = cpu_block["hz_actual"][0]
+        if psutil.LINUX:
+            cpu_clock = cpu_block["hz_actual_raw"][0]
+        else:
+            cpu_clock = cpu_block["hz_actual"][0]
 
         if cpu_clock / 1000000000 < 1:
             return f"{int(cpu_clock / 100000)} MHz" # MHz
@@ -139,6 +142,10 @@ class api:
     
     def ping():
         return round(ping3.ping('1.1.1.1')*1000)
+    
+    def swap_space():
+
+        return psutil.swap_memory()[0] / 1000000
 
 
 

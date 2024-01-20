@@ -1,4 +1,5 @@
-let options_endpoint = 'http://localhost:5000/api/v2/system';
+let options_endpoint = 'http://192.168.0.106:5000/api/v2/system';
+
 
 let cpu_list = null;
 let mem_list = null;
@@ -53,6 +54,8 @@ function fetchData() {
             document.getElementById('filesystem').textContent = data.disk.filesystem;
             document.getElementById('mountpoint').textContent = data.disk.mount;
             document.getElementById('disk_total').textContent = Math.round(data.disk.total) + " GB";
+
+            document.getElementById('title').textContent = data.other.hostname + " – sysinf";
 
             
 

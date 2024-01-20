@@ -1,3 +1,3 @@
-import cpuinfo
+import psutil
 
-print(cpuinfo.get_cpu_info())
+print(psutil.swap_memory()[0] / 1000000)

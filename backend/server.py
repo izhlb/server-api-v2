@@ -31,7 +31,8 @@ def get_users():
         "memory":{
             "total":f"{api.mem_total()}",
             "used":f"{api.mem_used()}",
-            "percent":f"{api.mem_percent()}"
+            "percent":f"{api.mem_percent()}",
+            "swap":f"{api.swap_space()}"
         },
         "net":{
             "data_sent":f"{api.net_sent_data_gb()}",
