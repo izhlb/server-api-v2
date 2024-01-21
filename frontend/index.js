@@ -175,7 +175,16 @@ function cpu_chart() {
 
 });
 
-}
+};
+
+
+function showsettings(){
+    document.getElementById('options-container').style.display = 'flex';
+};
+
+function exitsettings(){
+    document.getElementById('options-container').style.display = 'none';
+};
 
 fetchData();
 

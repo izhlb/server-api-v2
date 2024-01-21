@@ -68,4 +68,4 @@ if __name__ == '__main__':
     mem_thread = threading.Thread(target=api.mem_graph)
     mem_thread.daemon = True
     mem_thread.start()
-    app.run(host="0.0.0.0",port=5000, debug=True)
+    app.run(host="0.0.0.0",port=5000)
