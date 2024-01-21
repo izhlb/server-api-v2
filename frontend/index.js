@@ -11,18 +11,18 @@ let myChart;
 
 
 
- // Disable Ctrl + Scroll Zoom
+
  function disableZoom(event) {
   if (event.ctrlKey && (event.deltaY || event.wheelDelta)) {
       event.preventDefault();
   }
 }
 
-// Attach the event listener
+
 if (window.addEventListener) {
   window.addEventListener('wheel', disableZoom, { passive: false });
 } else {
-  // For older browsers
+
   window.attachEvent('onwheel', disableZoom);
 }
 function fetchData() {
