@@ -1,4 +1,4 @@
-let options_endpoint = 'http://192.168.0.106:5000/api/v2/system';
+let options_endpoint = 'http://localhost:5000/api/v2/system';
 
 
 let cpu_list = null;
@@ -49,6 +49,7 @@ function fetchData() {
             document.getElementById('mem_usage').textContent = data.memory.used;
             document.getElementById('mem_free').textContent = data.memory.percent + "%";
             document.getElementById('mem_total').textContent = data.memory.total;
+            document.getElementById('mem_swap').textContent = data.memory.swap;
 
             document.getElementById('disk_used').textContent = Math.round(disk_used) + " GB" ;
             document.getElementById('filesystem').textContent = data.disk.filesystem;
