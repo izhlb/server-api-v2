@@ -1,0 +1,11 @@
+psutil
+cpuinfo
+requests
+pytz
+datetime
+humanize
+socket
+ping3
+flask
+flask_cors
+threading
