@@ -25,8 +25,10 @@
     <div id="options-container" class="options-container">
         <div class="options">
             <button class="exit-options" onclick="exitsettings()" id="exit-options"></button>
+            <br>
+            <span>API Endpoint:</span><input type="text" id="input_api">
             <div class="options-buttons">
-                <button>Save Changes</button>
+                <button onclick="set_api_endpoint()">Save Changes</button>
                 <button style="border: 1px solid rgba(161, 46, 50, 1);">Exit</button>
             </div>
         </div>
@@ -103,7 +105,7 @@
                     <div class="card">
                         <div class="card-title"><span>Usage</span></div>
                         <div class="card-value"><span id="mem_usage" style="font-size: 39.3px;"
-                                class="fancy-text-pink">8GB</span></div>
+                                class="fancy-text-pink">-</span></div>
                         <div class="card-graph"></div>
                     </div>
                     <div class="card">

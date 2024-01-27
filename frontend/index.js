@@ -1,4 +1,13 @@
-let options_endpoint = 'http://localhost:5000/api/v2/system';
+
+let options_endpoint = '';
+
+
+function set_api_endpoint(){
+
+    let api = document.getElementById('input_api').value;
+    options_endpoint = api;
+}
+
 
 
 let cpu_list = null;
@@ -7,11 +16,6 @@ let mem_list = null;
 let disk_free = null;
 let disk_used = null;
 let myChart;
-
-
-
-
-
  function disableZoom(event) {
   if (event.ctrlKey && (event.deltaY || event.wheelDelta)) {
       event.preventDefault();
@@ -121,6 +125,10 @@ function cpu_chart() {
 
 
     var options = {
+        interaction: {
+            mode: "nearest",
+            axis: "x",
+          },
         animation: false,
         plugins:{
         legend: {
